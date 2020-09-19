@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.2.0/css/bootstrap.min.css"/>
+</head>
+<body>
+<div>
+    <div class="container-fluid text-center">
+        <div>
+            <h1>Documentations</h1>
+        </div>
+        <div class="text-success">
+            [[${message}]]
+        </div>
+        <div class="row border rounded">
+            <th:block th:each="doc : ${listDoc}">
+                <div style="float:left;">
+                    <div>
+                        <img style="width: 50px; height: 50px" th:src="@{/images/iconDocument.png}">
+                    </div>
+                    <div><a th:href="@{'/download?id=' + ${doc.id}}">[[${doc.name}]]</a></div>
+                    <div>([[${#numbers.formatInteger(doc.size , 4 , 'COMMA')}]] bytes)</div>
+                </div>
+
+            </th:block>
+        </div>
+        <form th:action="@{/upload}" enctype="multipart/form-data"
+              style="max-width: 600px; margin: 0 auto;" method="post">
+            <div class="border rounder m-3">
+                <h2>Upload your file : </h2>
+                <p>
+                    <input type="file" name="document" required>
+                </p>
+                <p>
+                    <input type="submit" value="Upload" class="btn btn-primary">
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
